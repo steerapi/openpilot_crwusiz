@@ -46,6 +46,18 @@ class PowerMonitoring:
     try:
       now = sec_since_boot()
 
+      # limit charging
+      def process_charging_ctrl():
+        charging_ctrl = True
+        battery_percent = HARDWARE.get_battery_capacity()
+        if charging_ctrl:
+          if battery_percent >= 60 and HARDWARE.get_battery_charging():
+            HARDWARE.set_battery_charging(False)
+          elif battery_percent <= 40 and not HARDWARE.get_battery_charging():
+            HARDWARE.set_battery_charging(True)
+        return charging_ctrl
+      process_charging_ctrl()
+
       # If peripheralState is None, we're probably not in a car, so we don't care
       if peripheralState is None or peripheralState.pandaType == log.PandaState.PandaType.unknown:
         with self.integration_lock:
