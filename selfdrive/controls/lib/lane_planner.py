@@ -5,6 +5,7 @@ from common.numpy_fast import interp, clip, mean
 from common.realtime import DT_MDL
 from selfdrive.hardware import EON, TICI
 from selfdrive.swaglog import cloudlog
+from common.params import Params
 
 ENABLE_ZORROBYTE = True
 ENABLE_INC_LANE_PROB = True
@@ -51,6 +52,9 @@ class LanePlanner:
     self.wide_camera = wide_camera
 
   def parse_model(self, md):
+    additional_camera_offset = int(Params().get("OffsetControlSelect", encoding='utf8'))
+    self.camera_offset = -(CAMERA_OFFSET+additional_camera_offset) if wide_camera else (CAMERA_OFFSET+additional_camera_offset)
+    
     lane_lines = md.laneLines
     if len(lane_lines) == 4 and len(lane_lines[0].t) == TRAJECTORY_SIZE:
       self.ll_t = (np.array(lane_lines[1].t) + np.array(lane_lines[2].t))/2
