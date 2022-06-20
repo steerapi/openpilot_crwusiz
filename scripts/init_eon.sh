@@ -12,13 +12,13 @@ if [ ! -f "/system/fonts/opensans_regular.ttf" ]; then
 
   mount -o remount,r /system
 
-  setprop persist.sys.locale ko-KR
-  setprop persist.sys.local ko-KR
-  setprop persist.sys.timezone Asia/Seoul
+  setprop persist.sys.locale en-US
+  setprop persist.sys.local en-US
+  setprop persist.sys.timezone Asia/Bangkok
 
   echo =================================================================
   echo Ko-KR NanumGothic font install complete
-  echo Ko-KR locale change complete
+  echo en-US locale change complete
   echo Bootanimation change complete
   echo =================================================================
   echo Reboot Now..!!
