@@ -48,14 +48,11 @@ class PowerMonitoring:
 
       # limit charging
       def process_charging_ctrl():
-        charging_ctrl = True
         battery_percent = HARDWARE.get_battery_capacity()
-        if charging_ctrl:
-          if battery_percent >= 60 and HARDWARE.get_battery_charging():
-            HARDWARE.set_battery_charging(False)
-          elif battery_percent <= 40 and not HARDWARE.get_battery_charging():
-            HARDWARE.set_battery_charging(True)
-        return charging_ctrl
+        if battery_percent >= 60:
+          HARDWARE.set_battery_charging(False)
+        elif battery_percent <= 40:
+          HARDWARE.set_battery_charging(True)
       process_charging_ctrl()
 
       # If peripheralState is None, we're probably not in a car, so we don't care
@@ -122,7 +119,9 @@ class PowerMonitoring:
               self._perform_integration(now, current_power * FUDGE_FACTOR)
 
               # Enable charging again
-              HARDWARE.set_battery_charging(True)
+              battery_percent = HARDWARE.get_battery_capacity()
+              if battery_percent <= 40:
+                HARDWARE.set_battery_charging(True)
             except Exception:
               cloudlog.exception("Pulsed power measurement failed")
 
