@@ -4,20 +4,20 @@
 #include "selfdrive/ui/qt/api.h"
 #include "selfdrive/ui/qt/widgets/input.h"
 
-//SshControl::SshControl() : ButtonControl("SSH Keys", "", "Warning: This grants SSH access to all public keys in your GitHub settings. Never enter a GitHub username other than your own. A comma employee will NEVER ask you to add their GitHub username.") {
-SshControl::SshControl() : ButtonControl("SSH Keys", "", "Github 사용자 ID에 등록된 SSH키로 변경합니다.") {
+SshControl::SshControl() : ButtonControl("SSH Keys", "", "Warning: This grants SSH access to all public keys in your GitHub settings. Never enter a GitHub username other than your own. A comma employee will NEVER ask you to add their GitHub username.") {
+// SshControl::SshControl() : ButtonControl("SSH Keys", "", "Github 사용자 ID에 등록된 SSH키로 변경합니다.") {
   username_label.setAlignment(Qt::AlignRight | Qt::AlignVCenter);
   username_label.setStyleSheet("color: #e0e879");
   hlayout->insertWidget(1, &username_label);
 
   QObject::connect(this, &ButtonControl::clicked, [=]() {
-    //if (text() == "ADD") {
-      //QString username = InputDialog::getText("Enter your GitHub username", this);
-    if (text() == "개인키사용") {
-      QString username = InputDialog::getText("GitHub ID를 입력하세요", this);
+    if (text() == "ADD") {
+      QString username = InputDialog::getText("Enter your GitHub username", this);
+    // if (text() == "개인키사용") {
+      // QString username = InputDialog::getText("GitHub ID를 입력하세요", this);
       if (username.length() > 0) {
-        //setText("LOADING");
-        setText("로딩중");
+        setText("LOADING");
+        // setText("로딩중");
         setEnabled(false);
         getUserKeys(username);
       }
@@ -35,12 +35,12 @@ void SshControl::refresh() {
   QString param = QString::fromStdString(params.get("GithubSshKeys"));
   if (param.length()) {
     username_label.setText(QString::fromStdString(params.get("GithubUsername")));
-    //setText("REMOVE");
-    setText("개인키제거");
+    setText("REMOVE");
+    // setText("개인키제거");
   } else {
     username_label.setText("");
-    //setText("ADD");
-    setText("개인키사용");
+    setText("ADD");
+    // setText("개인키사용");
   }
   setEnabled(true);
 }
@@ -53,16 +53,16 @@ void SshControl::getUserKeys(const QString &username) {
         params.put("GithubUsername", username.toStdString());
         params.put("GithubSshKeys", resp.toStdString());
       } else {
-        //ConfirmationDialog::alert(QString("Username '%1' has no keys on GitHub").arg(username), this);
-        ConfirmationDialog::alert(username + "등록된 SSH키가 없습니다.", this);
+        ConfirmationDialog::alert(QString("Username '%1' has no keys on GitHub").arg(username), this);
+        // ConfirmationDialog::alert(username + "등록된 SSH키가 없습니다.", this);
       }
     } else {
       if (request->timeout()) {
-        //ConfirmationDialog::alert("Request timed out", this);
-        ConfirmationDialog::alert("요청시간이 초과되었습니다.", this);
+        ConfirmationDialog::alert("Request timed out", this);
+        // ConfirmationDialog::alert("요청시간이 초과되었습니다.", this);
       } else {
-        //ConfirmationDialog::alert(QString("Username '%1' doesn't exist on GitHub").arg(username), this);
-        ConfirmationDialog::alert(username + "등록된 사용자가 아닙니다.", this);
+        ConfirmationDialog::alert(QString("Username '%1' doesn't exist on GitHub").arg(username), this);
+        // ConfirmationDialog::alert(username + "등록된 사용자가 아닙니다.", this);
       }
     }
 
@@ -74,7 +74,7 @@ void SshControl::getUserKeys(const QString &username) {
 }
 
 //LateralControlSelect
-LateralControlSelect::LateralControlSelect() : AbstractControl("LateralControl [√]", "조향로직을 선택합니다. (Pid/Indi/Lqr/Torque)", "../assets/offroad/icon_logic.png") {
+LateralControlSelect::LateralControlSelect() : AbstractControl("LateralControl [√]", "Choose a steering logic. (Pid/Indi/Lqr/Torque)", "../assets/offroad/icon_logic.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
   hlayout->addWidget(&label);
@@ -143,7 +143,7 @@ void LateralControlSelect::refresh() {
 }
 
 //MfcSelect
-MfcSelect::MfcSelect() : AbstractControl("MFC [√]", "MFC를 선택합니다. (Lkas/Ldws/Lfa)", "../assets/offroad/icon_mfc.png") {
+MfcSelect::MfcSelect() : AbstractControl("MFC [√]", "Select MFC. (Lkas/Ldws/Lfa)", "../assets/offroad/icon_mfc.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
   hlayout->addWidget(&label);
@@ -210,7 +210,7 @@ void MfcSelect::refresh() {
 }
 
 //AebSelect
-AebSelect::AebSelect() : AbstractControl("AEB [√]", "AEB 신호를 선택합니다. (Scc12/Fca11)", "../assets/offroad/icon_aeb.png") {
+AebSelect::AebSelect() : AbstractControl("AEB [√]", "Select the AEB signal. (Scc12/Fca11)", "../assets/offroad/icon_aeb.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
   hlayout->addWidget(&label);
@@ -275,7 +275,7 @@ void AebSelect::refresh() {
 }
 
 //LongControlSelect
-LongControlSelect::LongControlSelect() : AbstractControl("LongControl [√]", "LongControl 모드를 선택합니다. (Mad/Mad+Long)", "../assets/offroad/icon_long.png") {
+LongControlSelect::LongControlSelect() : AbstractControl("LongControl [√]", "Choose a LongControl mode. (Mad/Mad+Long)", "../assets/offroad/icon_long.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
   hlayout->addWidget(&label);
