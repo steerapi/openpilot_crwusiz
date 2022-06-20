@@ -685,8 +685,8 @@ void OnroadHud::drawRightDevUi(QPainter &p, int x, int y) {
        snprintf(val_str, sizeof(val_str), "─");
      }
 
-    //rh += devUiDrawElement(p, x, ry, val_str, "REL SPEED", speedUnit.toStdString().c_str(), valueColor);
-    rh += devUiDrawElement(p, x, ry, val_str, "속도차", speedUnit.toStdString().c_str(), valueColor);
+    rh += devUiDrawElement(p, x, ry, val_str, "REL SPEED", speedUnit.toStdString().c_str(), valueColor);
+    // rh += devUiDrawElement(p, x, ry, val_str, "속도차", speedUnit.toStdString().c_str(), valueColor);
     ry = y + rh;
   }
 
