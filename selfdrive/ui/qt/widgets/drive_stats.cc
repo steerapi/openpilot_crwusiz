@@ -27,7 +27,7 @@ DriveStats::DriveStats(QWidget* parent) : QFrame(parent) {
     grid_layout->setContentsMargins(0, 10, 0, 10);
 
     int row = 0;
-    grid_layout->addWidget(new QLabel("〔  누적 주행기록  〕 \U00002728"), 0, 0, 1, 3, Qt::AlignCenter);
+    grid_layout->addWidget(new QLabel("〔  Driving Record  〕 \U00002728"), 0, 0, 1, 3, Qt::AlignCenter);
     grid_layout->addItem(new QSpacerItem(0, 50), row++, 0, 1, 1);
     grid_layout->addWidget(new QLabel("────────────────────────────────"), row, 0, 1, 3, Qt::AlignCenter);
 

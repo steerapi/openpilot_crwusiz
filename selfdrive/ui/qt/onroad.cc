@@ -616,8 +616,8 @@ void OnroadHud::drawRightDevUi(QPainter &p, int x, int y) {
     }
     snprintf(val_str, sizeof(val_str), "%.0f%s%s", angleSteers , "°", "");
 
-    //rh += devUiDrawElement(p, x, ry, val_str, "REAL STEER", "", valueColor);
-    rh += devUiDrawElement(p, x, ry, val_str, "핸들 조향각", "", valueColor);
+    rh += devUiDrawElement(p, x, ry, val_str, "REAL STEER", "", valueColor);
+    // rh += devUiDrawElement(p, x, ry, val_str, "핸들 조향각", "", valueColor);
     ry = y + rh;
   }
 
@@ -634,8 +634,8 @@ void OnroadHud::drawRightDevUi(QPainter &p, int x, int y) {
     }
     snprintf(val_str, sizeof(val_str), "%.0f%s%s", steerAngleDesired, "°", "");
 
-    //rh += devUiDrawElement(p, x, ry, val_str, "DESIR STEER", "", valueColor);
-    rh += devUiDrawElement(p, x, ry, val_str, "OP 조향각", "", valueColor);
+    rh += devUiDrawElement(p, x, ry, val_str, "DESIR STEER", "", valueColor);
+    // rh += devUiDrawElement(p, x, ry, val_str, "OP 조향각", "", valueColor);
     ry = y + rh;
   }
 
@@ -658,8 +658,8 @@ void OnroadHud::drawRightDevUi(QPainter &p, int x, int y) {
     }
     snprintf(units_str, sizeof(units_str), "m");
 
-    //rh += devUiDrawElement(p, x, ry, val_str, "REL DIST", units_str, valueColor);
-    rh += devUiDrawElement(p, x, ry, val_str, "거리차", units_str, valueColor);
+    rh += devUiDrawElement(p, x, ry, val_str, "REL DIST", units_str, valueColor);
+    // rh += devUiDrawElement(p, x, ry, val_str, "거리차", units_str, valueColor);
     ry = y + rh;
   }
 
