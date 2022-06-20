@@ -570,16 +570,16 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
   QObject::connect(device, &DevicePanel::closeSettings, this, &SettingsWindow::closeSettings);
 
   QList<QPair<QString, QWidget *>> panels = {
-    //{"Device", device},
-    //{"Network", network_panel(this)},
-    //{"Toggles", new TogglesPanel(this)},
-    //{"Software", new SoftwarePanel(this)},
-    //{"Community", new CommunityPanel(this)},
-    {"장치", device},
-    {"설정", network_panel(this)},
-    {"토글", new TogglesPanel(this)},
-    {"정보", new SoftwarePanel(this)},
-    {"커뮤니티", new CommunityPanel(this)},
+    {"Device", device},
+    {"Network", network_panel(this)},
+    {"Toggles", new TogglesPanel(this)},
+    {"Software", new SoftwarePanel(this)},
+    {"Community", new CommunityPanel(this)},
+    // {"장치", device},
+    // {"설정", network_panel(this)},
+    // {"토글", new TogglesPanel(this)},
+    // {"정보", new SoftwarePanel(this)},
+    // {"커뮤니티", new CommunityPanel(this)},
   };
 
 #ifdef ENABLE_MAPS
