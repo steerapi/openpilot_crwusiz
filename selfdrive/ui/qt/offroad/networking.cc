@@ -133,6 +133,7 @@ AdvancedNetworking::AdvancedNetworking(QWidget* parent, WifiManager* wifi): QWid
   list->addItem(new SshToggle());
   list->addItem(new SshControl());
   list->addItem(horizontal_line());
+  list->addItem(new OffsetControlSelect());
   list->addItem(new LateralControlSelect());
   list->addItem(new MfcSelect());
   list->addItem(new AebSelect());

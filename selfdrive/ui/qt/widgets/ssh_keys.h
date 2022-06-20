@@ -33,6 +33,21 @@ private:
   void getUserKeys(const QString &username);
 };
 
+// OffsetControlSelect
+class OffsetControlSelect : public AbstractControl {
+  Q_OBJECT
+
+public:
+  OffsetControlSelect();
+
+private:
+  QPushButton btnplus;
+  QPushButton btnminus;
+  QLabel label;
+
+  void refresh();
+};
+
 // LateralControlSelect
 class LateralControlSelect : public AbstractControl {
   Q_OBJECT

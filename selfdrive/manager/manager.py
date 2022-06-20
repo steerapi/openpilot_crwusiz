@@ -50,6 +50,7 @@ def manager_init() -> None:
     ("PutPrebuilt", "0"),
     ("MfcSelect", "0"),
     ("AebSelect", "0"),
+    ("OffsetControlSelect", "0"),
     ("LateralControlSelect", "0"),
     ("ShutdownDisable", "1"),
     ("LoggerDisable", "1"),

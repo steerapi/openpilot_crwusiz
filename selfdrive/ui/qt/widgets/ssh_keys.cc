@@ -73,6 +73,68 @@ void SshControl::getUserKeys(const QString &username) {
   request->sendRequest("https://github.com/" + username + ".keys");
 }
 
+//OffsetControlSelect
+OffsetControlSelect::OffsetControlSelect() : AbstractControl("OffsetControl [√]", "Choose an offset value.", "../assets/offroad/icon_logic.png") {
+  label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
+  label.setStyleSheet("color: #e0e879");
+  hlayout->addWidget(&label);
+
+  btnminus.setStyleSheet(R"(
+    padding: 0;
+    border-radius: 50px;
+    font-size: 45px;
+    font-weight: 500;
+    color: #E4E4E4;
+    background-color: #393939;
+  )");
+  btnplus.setStyleSheet(R"(
+    padding: 0;
+    border-radius: 50px;
+    font-size: 45px;
+    font-weight: 500;
+    color: #E4E4E4;
+    background-color: #393939;
+  )");
+  btnminus.setFixedSize(120, 100);
+  btnplus.setFixedSize(120, 100);
+
+  hlayout->addWidget(&btnminus);
+  hlayout->addWidget(&btnplus);
+
+  QObject::connect(&btnminus, &QPushButton::released, [=]() {
+    auto str = QString::fromStdString(Params().get("OffsetControlSelect"));
+    int latcontrol = str.toInt();
+    latcontrol = latcontrol - 1;
+    // if (latcontrol <= 0 ) {
+    //   latcontrol = 0;
+    // }
+    QString latcontrols = QString::number(latcontrol);
+    Params().put("OffsetControlSelect", latcontrols.toStdString());
+    refresh();
+  });
+
+  QObject::connect(&btnplus, &QPushButton::released, [=]() {
+    auto str = QString::fromStdString(Params().get("OffsetControlSelect"));
+    int latcontrol = str.toInt();
+    latcontrol = latcontrol + 1;
+    // if (latcontrol >= 3 ) {
+    //   latcontrol = 3;
+    // }
+    QString latcontrols = QString::number(latcontrol);
+    Params().put("OffsetControlSelect", latcontrols.toStdString());
+    refresh();
+  });
+  refresh();
+}
+
+void OffsetControlSelect::refresh() {
+  QString latcontrol = QString::fromStdString(Params().get("OffsetControlSelect"));
+  label.setText(latcontrol);
+  btnminus.setText("◀");
+  btnplus.setText("▶");
+}
+
+
 //LateralControlSelect
 LateralControlSelect::LateralControlSelect() : AbstractControl("LateralControl [√]", "Choose a steering logic. (Pid/Indi/Lqr/Torque)", "../assets/offroad/icon_logic.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);

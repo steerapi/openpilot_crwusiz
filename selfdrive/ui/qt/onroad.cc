@@ -264,6 +264,7 @@ void OnroadHud::updateState(const UIState &s) {
   setProperty("longControl", cc.getSccSmoother().getLongControl());
   setProperty("gap", ce.getCruiseGap());
   setProperty("autoTrGap", cc.getSccSmoother().getAutoTrGap());
+  setProperty("offsetcontrol_status", cs.getOffsetControlSelect());
   setProperty("lateralcontrol_status", cs.getLateralControlSelect());
   setProperty("steerRatio", lp.getSteerRatio());
   setProperty("mdpsBus", cp.getMdpsBus());

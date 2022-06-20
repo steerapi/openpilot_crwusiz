@@ -416,6 +416,7 @@ C2NetworkPanel::C2NetworkPanel(QWidget *parent) : QWidget(parent) {
   list->addItem(new SshToggle());
   list->addItem(new SshControl());
   list->addItem(horizontal_line());
+  list->addItem(new OffsetControlSelect());
   list->addItem(new LateralControlSelect());
   list->addItem(new MfcSelect());
   list->addItem(new AebSelect());
