@@ -89,6 +89,7 @@ class Controls:
       get_one_can(self.can_sock)
 
       self.CI, self.CP = get_car(self.can_sock, self.pm.sock['sendcan'])
+      cloudlog.warning("Get car done")
     else:
       self.CI, self.CP = CI, CI.CP
 
