@@ -62,24 +62,24 @@ class CAR:
 
 # (addr, cars, bus, 1/freq*100, vl)
 STATIC_DSU_MSGS = [
-  (0x128, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.AVALON), 1,   3, b'\xf4\x01\x90\x83\x00\x37'),
-  (0x128, (CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH), 1,   3, b'\x03\x00\x20\x00\x00\x52'),
-  (0x141, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 1,   2, b'\x00\x00\x00\x46'),
-  (0x160, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 1,   7, b'\x00\x00\x08\x12\x01\x31\x9c\x51'),
-  (0x161, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.AVALON, CAR.LEXUS_RX, CAR.PRIUS_V), 1,   7, b'\x00\x1e\x00\x00\x00\x80\x07'),
-  (0X161, (CAR.HIGHLANDERH, CAR.HIGHLANDER, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH), 1,  7, b'\x00\x1e\x00\xd4\x00\x00\x5b'),
-  (0x283, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 0,   3, b'\x00\x00\x00\x00\x00\x00\x8c'),
-  (0x2E6, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,   3, b'\xff\xf8\x00\x08\x7f\xe0\x00\x4e'),
-  (0x2E7, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,   3, b'\xa8\x9c\x31\x9c\x00\x00\x00\x02'),
-  (0x33E, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,  20, b'\x0f\xff\x26\x40\x00\x1f\x00'),
-  (0x344, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 0,   5, b'\x00\x00\x01\x00\x00\x00\x00\x50'),
-  (0x365, (CAR.PRIUS, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.HIGHLANDERH), 0,  20, b'\x00\x00\x00\x80\x03\x00\x08'),
-  (0x365, (CAR.RAV4, CAR.RAV4H, CAR.COROLLA, CAR.HIGHLANDER, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 0,  20, b'\x00\x00\x00\x80\xfc\x00\x08'),
-  (0x366, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.HIGHLANDERH), 0,  20, b'\x00\x00\x4d\x82\x40\x02\x00'),
-  (0x366, (CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 0,  20, b'\x00\x72\x07\xff\x09\xfe\x00'),
-  (0x470, (CAR.PRIUS, CAR.LEXUS_RXH), 1, 100, b'\x00\x00\x02\x7a'),
-  (0x470, (CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.RAV4H, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.PRIUS_V), 1,  100, b'\x00\x00\x01\x79'),
-  (0x4CB, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDERH, CAR.HIGHLANDER, CAR.AVALON, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH, CAR.LEXUS_RX, CAR.PRIUS_V), 0, 100, b'\x0c\x00\x00\x00\x00\x00\x00\x00'),
+   (0x128, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.AVALON, CAR.AVALON_2021), 1,   3, b'\xf4\x01\x90\x83\x00\x37'),
+  (0x128, Ecu.dsu, (CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH), 1,   3, b'\x03\x00\x20\x00\x00\x52'),
+  (0x141, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH ), 1,   2, b'\x00\x00\x00\x46'),
+  (0x160, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 1,   7, b'\x00\x00\x08\x12\x01\x31\x9c\x51'),
+  (0x161, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.AVALON, CAR.AVALON_2021, CAR.LEXUS_RX), 1,   7, b'\x00\x1e\x00\x00\x00\x80\x07'),
+  (0X161, Ecu.dsu, (CAR.HIGHLANDERH, CAR.HIGHLANDER, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH), 1,  7, b'\x00\x1e\x00\xd4\x00\x00\x5b'),
+  (0x283, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 0,   3, b'\x00\x00\x00\x00\x00\x00\x8c'),
+  (0x2E6, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,   3, b'\xff\xf8\x00\x08\x7f\xe0\x00\x4e'),
+  (0x2E7, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,   3, b'\xa8\x9c\x31\x9c\x00\x00\x00\x02'),
+  (0x33E, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH), 0,  20, b'\x0f\xff\x26\x40\x00\x1f\x00'),
+  (0x344, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 0,   5, b'\x00\x00\x01\x00\x00\x00\x00\x50'),
+  (0x365, Ecu.dsu, (CAR.PRIUS, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.HIGHLANDERH), 0,  20, b'\x00\x00\x00\x80\x03\x00\x08'),
+  (0x365, Ecu.dsu, (CAR.RAV4, CAR.RAV4H, CAR.COROLLA, CAR.HIGHLANDER, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 0,  20, b'\x00\x00\x00\x80\xfc\x00\x08'),
+  (0x366, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.HIGHLANDERH), 0,  20, b'\x00\x00\x4d\x82\x40\x02\x00'),
+  (0x366, Ecu.dsu, (CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDER, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 0,  20, b'\x00\x72\x07\xff\x09\xfe\x00'),
+  (0x470, Ecu.dsu, (CAR.PRIUS, CAR.LEXUS_RXH), 1, 100, b'\x00\x00\x02\x7a'),
+  (0x470, Ecu.dsu, (CAR.HIGHLANDER, CAR.HIGHLANDERH, CAR.RAV4H, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_ESH), 1,  100, b'\x00\x00\x01\x79'),
+  (0x4CB, Ecu.dsu, (CAR.PRIUS, CAR.RAV4H, CAR.LEXUS_RXH, CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.RAV4, CAR.COROLLA, CAR.HIGHLANDERH, CAR.HIGHLANDER, CAR.AVALON, CAR.AVALON_2021, CAR.SIENNA, CAR.LEXUS_CTH, CAR.LEXUS_RX, CAR.LEXUS_ESH), 0, 100, b'\x0c\x00\x00\x00\x00\x00\x00\x00'),
 ]
 
 
@@ -1627,64 +1627,20 @@ FW_VERSIONS = {
 STEER_THRESHOLD = 100
 
 DBC = {
-  CAR.RAV4H: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.RAV4: dbc_dict('toyota_new_mc_pt_generated', 'toyota_adas'),
-  CAR.PRIUS: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.PRIUS_V: dbc_dict('toyota_new_mc_pt_generated', 'toyota_adas'),
-  CAR.COROLLA: dbc_dict('toyota_new_mc_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_RC: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_RX: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_RXH: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_RX_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.LEXUS_RXH_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.CHR: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.CHRH: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.CAMRY: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.CAMRYH: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.CAMRY_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.CAMRYH_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.HIGHLANDER: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.HIGHLANDER_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.HIGHLANDERH: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.HIGHLANDERH_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.AVALON: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.AVALON_2019: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.AVALONH_2019: dbc_dict('toyota_nodsu_pt_generated', 'toyota_adas'),
-  CAR.AVALON_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.RAV4_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.COROLLA_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
   CAR.COROLLAH_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.LEXUS_ES_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.LEXUS_ESH_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.LEXUS_ESH: dbc_dict('toyota_new_mc_pt_generated', 'toyota_adas'),
-  CAR.SIENNA: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_IS: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_CTH: dbc_dict('toyota_new_mc_pt_generated', 'toyota_adas'),
-  CAR.RAV4H_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.LEXUS_NXH: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_NX: dbc_dict('toyota_tnga_k_pt_generated', 'toyota_adas'),
-  CAR.LEXUS_NX_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.PRIUS_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.MIRAI: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
-  CAR.ALPHARD_TSS2: dbc_dict('toyota_nodsu_pt_generated', 'toyota_tss2_adas'),
 }
 
 # These cars have non-standard EPS torque scale factors. All others are 73
 EPS_SCALE = defaultdict(lambda: 73, {CAR.PRIUS: 66, CAR.COROLLA: 88, CAR.LEXUS_IS: 77, CAR.LEXUS_RC: 77, CAR.LEXUS_CTH: 100, CAR.PRIUS_V: 100})
 
 # Toyota/Lexus Safety Sense 2.0 and 2.5
-TSS2_CAR = {CAR.RAV4_TSS2, CAR.COROLLA_TSS2, CAR.COROLLAH_TSS2, CAR.LEXUS_ES_TSS2, CAR.LEXUS_ESH_TSS2, CAR.RAV4H_TSS2,
-            CAR.LEXUS_RX_TSS2, CAR.LEXUS_RXH_TSS2, CAR.HIGHLANDER_TSS2, CAR.HIGHLANDERH_TSS2, CAR.PRIUS_TSS2, CAR.CAMRY_TSS2, CAR.CAMRYH_TSS2,
-            CAR.MIRAI, CAR.LEXUS_NX_TSS2, CAR.ALPHARD_TSS2, CAR.AVALON_TSS2}
+NO_DSU_CAR = set([CAR.COROLLAH_TSS2])
+TSS2_CAR = set([CAR.COROLLAH_TSS2])
+NO_STOP_TIMER_CAR = set([CAR.COROLLAH_TSS2])  # no resume button press required
 
-NO_DSU_CAR = TSS2_CAR | {CAR.CHR, CAR.CHRH, CAR.CAMRY, CAR.CAMRYH}
-
-EV_HYBRID_CAR = {CAR.AVALONH_2019, CAR.CAMRYH, CAR.CAMRYH_TSS2, CAR.CHRH, CAR.COROLLAH_TSS2, CAR.HIGHLANDERH, CAR.HIGHLANDERH_TSS2, CAR.PRIUS,
-                 CAR.PRIUS_V, CAR.RAV4H, CAR.RAV4H_TSS2, CAR.LEXUS_CTH, CAR.MIRAI, CAR.LEXUS_ESH, CAR.LEXUS_ESH_TSS2, CAR.LEXUS_NXH, CAR.LEXUS_RXH,
-                 CAR.LEXUS_RXH_TSS2, CAR.PRIUS_TSS2}
+EV_HYBRID_CAR = {CAR.COROLLAH_TSS2}
 
 # no resume button press required
-NO_STOP_TIMER_CAR = TSS2_CAR | {CAR.PRIUS_V, CAR.RAV4H, CAR.HIGHLANDERH, CAR.HIGHLANDER, CAR.SIENNA, CAR.LEXUS_ESH}
 
 def main():
   for member, value in vars(CAR).items():
