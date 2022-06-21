@@ -76,7 +76,7 @@ class CarState(CarStateBase):
     self.needs_angle_offset = True #CP.carFingerprint not in TSS2_CAR or CP.carFingerprint in [CAR.LEXUS_ISH] or self.dp_toyota_zss
     self.angle_offset = 0.
 
-  def update(self, cp, cp_cam, frame):
+  def update(self, cp, cp_cam):
     ret = car.CarState.new_message()
 
     ret.doorOpen = any([cp.vl["SEATS_DOORS"]['DOOR_OPEN_FL'], cp.vl["SEATS_DOORS"]['DOOR_OPEN_FR'],
@@ -165,45 +165,7 @@ class CarState(CarStateBase):
     #     if int(Params().get('dp_accel_profile')) != DP_NORMAL:
     #       put_nonblocking('dp_accel_profile',str(DP_NORMAL))
     #       put_nonblocking('dp_last_modified',str(floor(time.time())))
-    #Arne Blindspot code.
-    if frame > 999 and self.CP.carFingerprint in [CAR.RAV4H, CAR.HIGHLANDER]:#not (self.CP.carFingerprint in TSS2_CAR or self.CP.carFingerprint == CAR.CAMRY or self.CP.carFingerprint == CAR.CAMRYH):
-      if cp.vl["DEBUG"]['BLINDSPOTSIDE']==65: #Left
-        if cp.vl["DEBUG"]['BLINDSPOTD1'] != self.leftblindspotD1:
-          self.leftblindspotD1 = cp.vl["DEBUG"]['BLINDSPOTD1']
-          self.leftblindspotcounter = 21
-        if cp.vl["DEBUG"]['BLINDSPOTD2'] != self.leftblindspotD2:
-          self.leftblindspotD2 = cp.vl["DEBUG"]['BLINDSPOTD2']
-          self.leftblindspotcounter = 21
-        if (self.leftblindspotD1 > 10) or (self.leftblindspotD2 > 10):
-          self.leftblindspot = bool(1)
-          #print("Left Blindspot Detected")
-      elif  cp.vl["DEBUG"]['BLINDSPOTSIDE']==66: #Right
-        if cp.vl["DEBUG"]['BLINDSPOTD1'] != self.rightblindspotD1:
-          self.rightblindspotD1 = cp.vl["DEBUG"]['BLINDSPOTD1']
-          self.rightblindspotcounter = 21
-        if cp.vl["DEBUG"]['BLINDSPOTD2'] != self.rightblindspotD2:
-          self.rightblindspotD2 = cp.vl["DEBUG"]['BLINDSPOTD2']
-          self.rightblindspotcounter = 21
-        if (self.rightblindspotD1 > 10) or (self.rightblindspotD2 > 10):
-          self.rightblindspot = bool(1)
-          #print("Right Blindspot Detected")
-      self.rightblindspotcounter = self.rightblindspotcounter -1 if self.rightblindspotcounter > 0 else 0
-      self.leftblindspotcounter = self.leftblindspotcounter -1 if self.leftblindspotcounter > 0 else 0
-      if self.leftblindspotcounter == 0:
-        self.leftblindspot = False
-        self.leftblindspotD1 = 0
-        self.leftblindspotD2 = 0
-      if self.rightblindspotcounter == 0:
-        self.rightblindspot = False
-        self.rightblindspotD1 = 0
-        self.rightblindspotD2 = 0
-    elif frame > 999 and self.CP.carFingerprint in TSS2_CAR or self.CP.carFingerprint == CAR.AVALON_2021:
-      self.leftblindspot = cp.vl["BSM"]['L_ADJACENT'] == 1
-      self.leftblindspotD1 = 10.1
-      self.leftblindspotD2 = 10.1
-      self.rightblindspot = cp.vl["BSM"]['R_ADJACENT'] == 1
-      self.rightblindspotD1 = 10.1
-      self.rightblindspotD2 = 10.1
+    
     #Arne Distance button read and write code.
     if self.read_distance_lines != cp.vl["PCM_CRUISE_SM"]['DISTANCE_LINES'] and physical_buttons_DF:
       self.read_distance_lines = cp.vl["PCM_CRUISE_SM"]['DISTANCE_LINES']
