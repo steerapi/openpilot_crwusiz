@@ -126,15 +126,16 @@ class CarState(CarStateBase):
     can_gear = int(cp.vl["GEAR_PACKET"]['GEAR'])
     ret.gearShifter = self.parse_gear_shifter(self.shifter_values.get(can_gear, None))
     dp_profile = 0
+    angle_later = 0
 
-    if not travis:
-      self.sm.update(0)
+    # if not travis:
+    #   self.sm.update(0)
       # self.smartspeed = self.sm['liveMapData'].speedLimit
       # dp_profile = self.sm['dragonConf'].dpAccelProfile
-    if not travis and self.sm.updated['latControl'] and ret.vEgo > 11.0:
-      angle_later = self.sm['latControl'].anglelater
-    else:
-      angle_later = 0
+    # if not travis and self.sm.updated['latControl'] and ret.vEgo > 11.0:
+    #   angle_later = self.sm['latControl'].anglelater
+    # else:
+    #   angle_later = 0
     if self.CP.carFingerprint in [CAR.COROLLAH_TSS2, CAR.LEXUS_ESH_TSS2, CAR.RAV4H_TSS2, CAR.CHRH, CAR.PRIUS_TSS2, CAR.HIGHLANDERH_TSS2]:
       sport_on = cp.vl["GEAR_PACKET2"]['SPORT_ON']
       econ_on = cp.vl["GEAR_PACKET2"]['ECON_ON']
