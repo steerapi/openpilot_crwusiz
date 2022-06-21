@@ -184,7 +184,7 @@ class CarState(CarStateBase):
     ret.steeringTorqueEps = cp.vl["STEER_TORQUE_SENSOR"]['STEER_TORQUE_EPS']
     # we could use the override bit from dbc, but it's triggered at too high torque values
     ret.steeringPressed = abs(ret.steeringTorque) > STEER_THRESHOLD
-    ret.steerWarning = cp.vl["EPS_STATUS"]['LKA_STATE'] not in [1, 5]
+    # ret.steerWarning = cp.vl["EPS_STATUS"]['LKA_STATE'] not in [1, 5]
 
     if self.CP.carFingerprint in [CAR.LEXUS_IS, CAR.LEXUS_NXT]:
       self.main_on = cp.vl["DSU_CRUISE"]['MAIN_ON'] != 0
