@@ -38,13 +38,13 @@ class CarInterface(CarInterfaceBase):
       set_lat_tune(ret.lateralTuning, LatTunes.INDI_PRIUS)
       ret.steerActuatorDelay = 0.3
 
-    elif candidate == CAR.PRIUS_V:
-      stop_and_go = True
-      ret.wheelbase = 2.78
-      ret.steerRatio = 17.4
-      tire_stiffness_factor = 0.5533
-      ret.mass = 4387. * CV.LB_TO_KG + STD_CARGO_KG
-      set_lat_tune(ret.lateralTuning, LatTunes.LQR_RAV4)
+    # elif candidate == CAR.PRIUS_V:
+    #   stop_and_go = True
+    #   ret.wheelbase = 2.78
+    #   ret.steerRatio = 17.4
+    #   tire_stiffness_factor = 0.5533
+    #   ret.mass = 4387. * CV.LB_TO_KG + STD_CARGO_KG
+    #   set_lat_tune(ret.lateralTuning, LatTunes.LQR_RAV4)
 
     elif candidate in (CAR.RAV4, CAR.RAV4H):
       stop_and_go = True if (candidate in CAR.RAV4H) else False
@@ -78,7 +78,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 3300. * CV.LB_TO_KG + STD_CARGO_KG
       set_lat_tune(ret.lateralTuning, LatTunes.PID_F)
 
-    elif candidate in (CAR.CAMRY, CAR.CAMRYH, CAR.CAMRY_TSS2, CAR.CAMRYH_TSS2):
+    elif candidate in (CAR.CAMRY, CAR.CAMRYH):
       stop_and_go = True
       ret.wheelbase = 2.82448
       ret.steerRatio = 13.7
@@ -102,7 +102,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 4607. * CV.LB_TO_KG + STD_CARGO_KG  # mean between normal and hybrid limited
       set_lat_tune(ret.lateralTuning, LatTunes.PID_G)
 
-    elif candidate in (CAR.AVALON, CAR.AVALON_2019, CAR.AVALONH_2019, CAR.AVALON_TSS2):
+    elif candidate in (CAR.AVALON):
       # starting from 2019, all Avalon variants have stop and go
       # https://engage.toyota.com/static/images/toyota_safety_sense/TSS_Applicability_Chart.pdf
       stop_and_go = candidate != CAR.AVALON
@@ -151,7 +151,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 4590. * CV.LB_TO_KG + STD_CARGO_KG
       set_lat_tune(ret.lateralTuning, LatTunes.PID_J)
 
-    elif candidate in (CAR.LEXUS_IS, CAR.LEXUS_RC):
+    elif candidate in (CAR.LEXUS_IS):
       ret.wheelbase = 2.79908
       ret.steerRatio = 13.3
       tire_stiffness_factor = 0.444
@@ -166,7 +166,7 @@ class CarInterface(CarInterfaceBase):
       ret.mass = 3108 * CV.LB_TO_KG + STD_CARGO_KG  # mean between min and max
       set_lat_tune(ret.lateralTuning, LatTunes.PID_M)
 
-    elif candidate in (CAR.LEXUS_NXH, CAR.LEXUS_NX, CAR.LEXUS_NX_TSS2):
+    elif candidate in (CAR.LEXUS_NXH, CAR.LEXUS_NX):
       stop_and_go = True
       ret.wheelbase = 2.66
       ret.steerRatio = 14.7
@@ -181,22 +181,6 @@ class CarInterface(CarInterfaceBase):
       tire_stiffness_factor = 0.6371   # hand-tune
       ret.mass = 3115. * CV.LB_TO_KG + STD_CARGO_KG
       set_lat_tune(ret.lateralTuning, LatTunes.PID_N)
-
-    elif candidate == CAR.MIRAI:
-      stop_and_go = True
-      ret.wheelbase = 2.91
-      ret.steerRatio = 14.8
-      tire_stiffness_factor = 0.8
-      ret.mass = 4300. * CV.LB_TO_KG + STD_CARGO_KG
-      set_lat_tune(ret.lateralTuning, LatTunes.PID_C)
-
-    elif candidate == CAR.ALPHARD_TSS2:
-      stop_and_go = True
-      ret.wheelbase = 3.00
-      ret.steerRatio = 14.2
-      tire_stiffness_factor = 0.444
-      ret.mass = 4305. * CV.LB_TO_KG + STD_CARGO_KG
-      set_lat_tune(ret.lateralTuning, LatTunes.PID_J)
 
     ret.steerRateCost = 1.
     ret.centerToFront = ret.wheelbase * 0.44
