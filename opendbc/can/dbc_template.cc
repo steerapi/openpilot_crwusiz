@@ -6,11 +6,15 @@ namespace {
 const Signal sigs_{{address}}[] = {
   {% for sig in sigs %}
     {
+      {% if sig.is_little_endian %}
+        {% set b1 = sig.start_bit %}
+      {% else %}
+        {% set b1 = (sig.start_bit//8)*8  + (-sig.start_bit-1) % 8 %}
+      {% endif %}
       .name = "{{sig.name}}",
-      .start_bit = {{sig.start_bit}},
-      .msb  = {{sig.msb}},
-      .lsb = {{sig.lsb}},
-      .size = {{sig.size}},
+      .b1 = {{b1}},
+      .b2 = {{sig.size}},
+      .bo = {{64 - (b1 + sig.size)}},
       .is_signed = {{"true" if sig.is_signed else "false"}},
       .factor = {{sig.factor}},
       .offset = {{sig.offset}},
@@ -32,10 +36,6 @@ const Signal sigs_{{address}}[] = {
       {% elif address in [512, 513] and sig.name == "CHECKSUM_PEDAL" %}
       .type = SignalType::PEDAL_CHECKSUM,
       {% elif address in [512, 513] and sig.name == "COUNTER_PEDAL" %}
-      .type = SignalType::PEDAL_COUNTER,
-      {% elif address == 592 and sig.name == "CHECKSUM" %}
-      .type = SignalType::PEDAL_CHECKSUM,
-      {% elif address == 592 and sig.name == "COUNTER" %}
       .type = SignalType::PEDAL_COUNTER,
       {% else %}
       .type = SignalType::DEFAULT,

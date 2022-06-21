@@ -11,7 +11,6 @@ for x in sorted(os.listdir('../')):
     in_fn = [os.path.join('../', x), 'dbc_template.cc']
     out_fn = os.path.join('dbc_out', x.replace(".dbc", ".cc"))
     dbc = env.Command(out_fn, in_fn, compile_dbc)
-    env.Depends(dbc, ["dbc.py", "process_dbc.py"])
     dbcs.append(dbc)
 
 libdbc = env.SharedLibrary('libdbc', ["dbc.cc", "parser.cc", "packer.cc", "common.cc"]+dbcs, LIBS=["capnp", "kj"])
@@ -19,8 +18,5 @@ libdbc = env.SharedLibrary('libdbc', ["dbc.cc", "parser.cc", "packer.cc", "commo
 # Build packer and parser
 lenv = envCython.Clone()
 lenv["LINKFLAGS"] += [libdbc[0].get_labspath()]
-parser = lenv.Program('parser_pyx.so', 'parser_pyx.pyx')
-packer = lenv.Program('packer_pyx.so', 'packer_pyx.pyx')
-
-lenv.Depends(parser, libdbc)
-lenv.Depends(packer, libdbc)
+lenv.Program('parser_pyx.so', 'parser_pyx.pyx')
+lenv.Program('packer_pyx.so', 'packer_pyx.pyx')

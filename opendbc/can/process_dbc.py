@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import print_function
 import os
 import sys
 
@@ -53,7 +54,7 @@ def process(in_fn, out_fn):
     checksum_start_bit = 0
     counter_start_bit = None
     little_endian = True
-  elif can_dbc.name.startswith(("chrysler_", "stellantis_")):
+  elif can_dbc.name.startswith(("chrysler_")):
     checksum_type = "chrysler"
     checksum_size = 8
     counter_size = None
@@ -103,14 +104,10 @@ def process(in_fn, out_fn):
     if count > 1:
       sys.exit("%s: Duplicate message name in DBC file %s" % (dbc_name, name))
 
-  parser_code = template.render(dbc=can_dbc, checksum_type=checksum_type, msgs=msgs, def_vals=def_vals)
+  parser_code = template.render(dbc=can_dbc, checksum_type=checksum_type, msgs=msgs, def_vals=def_vals, len=len)
 
-  with open(out_fn, "a+") as out_f:
-    out_f.seek(0)
-    if out_f.read() != parser_code:
-      out_f.seek(0)
-      out_f.truncate()
-      out_f.write(parser_code)
+  with open(out_fn, "w") as out_f:
+    out_f.write(parser_code)
 
 def main():
   if len(sys.argv) != 3:

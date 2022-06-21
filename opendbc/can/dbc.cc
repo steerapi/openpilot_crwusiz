@@ -2,9 +2,13 @@
 
 #include "common_dbc.h"
 
+namespace {
+
 std::vector<const DBC*>& get_dbcs() {
   static std::vector<const DBC*> vec;
   return vec;
+}
+
 }
 
 const DBC* dbc_lookup(const std::string& dbc_name) {
