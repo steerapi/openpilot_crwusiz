@@ -288,15 +288,16 @@ class CarState(CarStateBase):
     #print("ret.cruiseState.speed before = " + str (ret.cruiseState.speed))
     ret.cruiseState.speed = min(max(7, ret.cruiseState.speed - self.setspeedoffset),v_cruise_pcm_max) * CV.KPH_TO_MS
     #print("ret.cruiseState.speed after = " + str(ret.cruiseState.speed) + " m/s or " +  str(round(ret.cruiseState.speed * CV.MS_TO_KPH)) + " kph")
-    if not ret.leftBlinker and not ret.rightBlinker:
-      self.Angles[self.Angle_counter] = abs(ret.steeringAngle)
-      self.Angles_later[self.Angle_counter] = abs(angle_later)
-    else:
-      self.Angles[self.Angle_counter] = abs(ret.steeringAngle) * 0.8
-      if ret.vEgo > 11.0:
-        self.Angles_later[self.Angle_counter] = abs(angle_later) * 0.8
-      else:
-        self.Angles_later[self.Angle_counter] = 0.0
+    # if not ret.leftBlinker and not ret.rightBlinker:
+    #   self.Angles[self.Angle_counter] = abs(ret.steeringAngle)
+    #   self.Angles_later[self.Angle_counter] = abs(angle_later)
+    # else:
+    #   self.Angles[self.Angle_counter] = abs(ret.steeringAngle) * 0.8
+    #   if ret.vEgo > 11.0:
+    #     self.Angles_later[self.Angle_counter] = abs(angle_later) * 0.8
+    #   else:
+    #     self.Angles_later[self.Angle_counter] = 0.0
+    self.Angles_later[self.Angle_counter] = 0.0
 
     if dp_profile == DP_ECO:
       factor = 1.0
