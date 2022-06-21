@@ -762,7 +762,7 @@ SelectCar::SelectCar(QWidget* parent): QWidget(parent) {
   //list->setAttribute(Qt::WA_AcceptTouchEvents, true);
   QScroller::grabGesture(list->viewport(), QScroller::LeftMouseButtonGesture);
   list->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-  list->addItem("[ 차량선택 사용안함 ]");
+  list->addItem("[ Disable vehicle selection ]");
   QStringList items = get_list("/data/params/d/SupportedCars");
   list->addItems(items);
   list->setCurrentRow(0);
