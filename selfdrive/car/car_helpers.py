@@ -191,5 +191,6 @@ def get_car(logcan, sendcan):
   CP.fingerprintSource = source
   CP.fuzzyFingerprint = not exact_match
 
+  cloudlog.warning("CarInterface %r", CarInterface) 
   return CarInterface(CP, CarController, CarState), CP
 

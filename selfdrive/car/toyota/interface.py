@@ -239,7 +239,7 @@ class CarInterface(CarInterfaceBase):
 
     return ret
 
-  def _update(self, c: car.CarControl) -> car.CarState:
+  def _update(self, c):
     pass
   
   # returns a car.CarState
