@@ -27,7 +27,7 @@ DP_ECO = 1
 DP_NORMAL = 2
 DP_SPORT = 3
 
-Params().put('dp_accel_profile', str(DP_ECO))
+# Params().put('dp_accel_profile', str(DP_ECO))
 
 class CarState(CarStateBase):
   def __init__(self, CP):
@@ -152,19 +152,19 @@ class CarState(CarStateBase):
           sport_on = 0
     if physical_buttons_LKAS:
       self.lkas = cp_cam.vl["LKAS_HUD"]['SET_ME_X01']
-    if not travis and physical_buttons_AP:
-      if econ_on == 1 and dp_profile !=  DP_ECO:
-        if int(Params().get('dp_accel_profile')) != DP_ECO:
-          put_nonblocking('dp_accel_profile',str(DP_ECO))
-          put_nonblocking('dp_last_modified',str(floor(time.time())))
-      if sport_on == 1 and dp_profile !=  DP_SPORT:
-        if int(Params().get('dp_accel_profile')) != DP_SPORT:
-          put_nonblocking('dp_accel_profile',str(DP_SPORT))
-          put_nonblocking('dp_last_modified',str(floor(time.time())))
-      if sport_on == 0 and econ_on == 0 and dp_profile !=  DP_NORMAL:
-        if int(Params().get('dp_accel_profile')) != DP_NORMAL:
-          put_nonblocking('dp_accel_profile',str(DP_NORMAL))
-          put_nonblocking('dp_last_modified',str(floor(time.time())))
+    # if not travis and physical_buttons_AP:
+    #   if econ_on == 1 and dp_profile !=  DP_ECO:
+    #     if int(Params().get('dp_accel_profile')) != DP_ECO:
+    #       put_nonblocking('dp_accel_profile',str(DP_ECO))
+    #       put_nonblocking('dp_last_modified',str(floor(time.time())))
+    #   if sport_on == 1 and dp_profile !=  DP_SPORT:
+    #     if int(Params().get('dp_accel_profile')) != DP_SPORT:
+    #       put_nonblocking('dp_accel_profile',str(DP_SPORT))
+    #       put_nonblocking('dp_last_modified',str(floor(time.time())))
+    #   if sport_on == 0 and econ_on == 0 and dp_profile !=  DP_NORMAL:
+    #     if int(Params().get('dp_accel_profile')) != DP_NORMAL:
+    #       put_nonblocking('dp_accel_profile',str(DP_NORMAL))
+    #       put_nonblocking('dp_last_modified',str(floor(time.time())))
     #Arne Blindspot code.
     if frame > 999 and self.CP.carFingerprint in [CAR.RAV4H, CAR.HIGHLANDER]:#not (self.CP.carFingerprint in TSS2_CAR or self.CP.carFingerprint == CAR.CAMRY or self.CP.carFingerprint == CAR.CAMRYH):
       if cp.vl["DEBUG"]['BLINDSPOTSIDE']==65: #Left
