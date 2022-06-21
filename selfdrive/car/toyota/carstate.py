@@ -27,6 +27,8 @@ DP_ECO = 1
 DP_NORMAL = 2
 DP_SPORT = 3
 
+Params().put('dp_accel_profile', str(DP_ECO))
+
 class CarState(CarStateBase):
   def __init__(self, CP):
     super().__init__(CP)
@@ -34,7 +36,7 @@ class CarState(CarStateBase):
     self.shifter_values = can_define.dv["GEAR_PACKET"]['GEAR']
 
     # dp
-    self.dp_toyota_zss = Params().get('dp_toyota_zss') == b'1'
+    self.dp_toyota_zss = False
 
     # All TSS2 car have the accurate sensor
     self.accurate_steer_angle_seen = CP.carFingerprint in TSS2_CAR or CP.carFingerprint in [CAR.LEXUS_ISH] or self.dp_toyota_zss
@@ -531,8 +533,8 @@ class CarState(CarStateBase):
       signals += [("R_ADJACENT", "BSM", 0)]
       signals += [("R_APPROACHING", "BSM", 0)]
 
-    if Params().get('dp_toyota_zss') == b'1':
-      signals += [("ZORRO_STEER", "SECONDARY_STEER_ANGLE", 0)]
+    # if Params().get('dp_toyota_zss') == b'1':
+    #   signals += [("ZORRO_STEER", "SECONDARY_STEER_ANGLE", 0)]
 
     checks = []
     return CANParser(DBC[CP.carFingerprint]['pt'], signals, checks, 0)
