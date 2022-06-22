@@ -11,6 +11,8 @@ from selfdrive.modeld.constants import T_IDXS
 V_CRUISE_MAX = 145  # kph
 V_CRUISE_MIN = 8  # kph
 V_CRUISE_ENABLE_MIN = 40  # kph
+V_CRUISE_DELTA_MI = 5 * CV.MPH_TO_KPH
+V_CRUISE_DELTA_KM = 10
 
 LAT_MPC_N = 16
 LON_MPC_N = 32
