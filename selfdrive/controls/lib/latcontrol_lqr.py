@@ -1,13 +1,11 @@
 import math
 import numpy as np
 
-from common.numpy_fast import clip, interp
+from common.numpy_fast import clip
 from common.realtime import DT_CTRL
 from cereal import log
 from selfdrive.controls.lib.latcontrol import LatControl, MIN_STEER_SPEED
 
-TORQUE_SCALE_BP = [0., 30., 80., 100., 130.]
-TORQUE_SCALE_V = [0.2, 0.35, 0.63, 0.67, 0.7]
 
 class LatControlLQR(LatControl):
   def __init__(self, CP, CI):
@@ -35,7 +33,7 @@ class LatControlLQR(LatControl):
   def update(self, active, CS, VM, params, last_actuators, desired_curvature, desired_curvature_rate, llk):
     lqr_log = log.ControlsState.LateralLQRState.new_message()
 
-    torque_scale = interp(CS.vEgo * 3.6, TORQUE_SCALE_BP, TORQUE_SCALE_V)
+    torque_scale = (0.45 + CS.vEgo / 60.0)**2  # Scale actuator model with speed
 
     # Subtract offset. Zero angle should correspond to zero torque
     steering_angle_no_offset = CS.steeringAngleDeg - params.angleOffsetAverageDeg
@@ -76,7 +74,6 @@ class LatControlLQR(LatControl):
           self.i_lqr = i
 
       output_steer = lqr_output + self.i_lqr
-      output_steer *= interp(abs((desired_angle + angle_steers_k) / 2.), [10., 45., 90.], [1, 1.2, 1.3])
       output_steer = clip(output_steer, -self.steer_max, self.steer_max)
 
     lqr_log.steeringAngleDeg = angle_steers_k

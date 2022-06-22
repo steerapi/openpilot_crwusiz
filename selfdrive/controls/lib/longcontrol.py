@@ -1,8 +1,8 @@
 from cereal import car
 from common.numpy_fast import clip, interp
 from common.realtime import DT_CTRL
-from selfdrive.controls.lib.pid import PIDController
 from selfdrive.controls.lib.drive_helpers import CONTROL_N
+from selfdrive.controls.lib.pid import PIDController
 from selfdrive.modeld.constants import T_IDXS
 
 LongCtrlState = car.CarControl.Actuators.LongControlState
@@ -23,7 +23,7 @@ def apply_deadzone(error, deadzone):
 
 
 def long_control_state_trans(CP, active, long_control_state, v_ego, v_target,
-                             v_target_future, brake_pressed, cruise_standstill, radar_state):
+                             v_target_future, brake_pressed, cruise_standstill):
   """Update longitudinal control state machine"""
   accelerating = v_target_future > v_target
   stopping_condition = (v_ego < 2.0 and cruise_standstill) or \
@@ -31,10 +31,6 @@ def long_control_state_trans(CP, active, long_control_state, v_ego, v_target,
                         ((v_target_future < CP.vEgoStopping and not accelerating) or brake_pressed))
 
   starting_condition = v_target_future > CP.vEgoStarting and accelerating and not cruise_standstill
-
-  # neokii
-  if radar_state is not None and radar_state.leadOne is not None and radar_state.leadOne.status:
-    starting_condition = starting_condition and radar_state.leadOne.vLead > CP.vEgoStarting
 
   if not active:
     long_control_state = LongCtrlState.off
@@ -54,12 +50,13 @@ def long_control_state_trans(CP, active, long_control_state, v_ego, v_target,
   return long_control_state
 
 
-class LongControl():
+class LongControl:
   def __init__(self, CP):
+    self.CP = CP
     self.long_control_state = LongCtrlState.off  # initialized to off
     self.pid = PIDController((CP.longitudinalTuning.kpBP, CP.longitudinalTuning.kpV),
                              (CP.longitudinalTuning.kiBP, CP.longitudinalTuning.kiV),
-                             k_f = CP.longitudinalTuning.kf, rate=1 / DT_CTRL)
+                             k_f=CP.longitudinalTuning.kf, rate=1 / DT_CTRL)
     self.v_pid = 0.0
     self.last_output_accel = 0.0
 
@@ -68,7 +65,7 @@ class LongControl():
     self.pid.reset()
     self.v_pid = v_pid
 
-  def update(self, active, CS, CP, long_plan, accel_limits, t_since_plan, radar_state):
+  def update(self, active, CS, long_plan, accel_limits, t_since_plan):
     """Update longitudinal control. This updates the state machine and runs a PID loop"""
     # Interp control trajectory
     speeds = long_plan.speeds
@@ -76,11 +73,11 @@ class LongControl():
       v_target = interp(t_since_plan, T_IDXS[:CONTROL_N], speeds)
       a_target = interp(t_since_plan, T_IDXS[:CONTROL_N], long_plan.accels)
 
-      v_target_lower = interp(CP.longitudinalActuatorDelayLowerBound + t_since_plan, T_IDXS[:CONTROL_N], speeds)
-      a_target_lower = 2 * (v_target_lower - v_target) / CP.longitudinalActuatorDelayLowerBound - a_target
+      v_target_lower = interp(self.CP.longitudinalActuatorDelayLowerBound + t_since_plan, T_IDXS[:CONTROL_N], speeds)
+      a_target_lower = 2 * (v_target_lower - v_target) / self.CP.longitudinalActuatorDelayLowerBound - a_target
 
-      v_target_upper = interp(CP.longitudinalActuatorDelayUpperBound + t_since_plan, T_IDXS[:CONTROL_N], speeds)
-      a_target_upper = 2 * (v_target_upper - v_target) / CP.longitudinalActuatorDelayUpperBound - a_target
+      v_target_upper = interp(self.CP.longitudinalActuatorDelayUpperBound + t_since_plan, T_IDXS[:CONTROL_N], speeds)
+      a_target_upper = 2 * (v_target_upper - v_target) / self.CP.longitudinalActuatorDelayUpperBound - a_target
       a_target = min(a_target_lower, a_target_upper)
 
       v_target_future = speeds[-1]
@@ -97,9 +94,9 @@ class LongControl():
 
     # Update state machine
     output_accel = self.last_output_accel
-    self.long_control_state = long_control_state_trans(CP, active, self.long_control_state, CS.vEgo,
+    self.long_control_state = long_control_state_trans(self.CP, active, self.long_control_state, CS.vEgo,
                                                        v_target, v_target_future, CS.brakePressed,
-                                                       CS.cruiseState.standstill, radar_state)
+                                                       CS.cruiseState.standstill)
 
     if self.long_control_state == LongCtrlState.off:
       self.reset(CS.vEgo)
@@ -111,8 +108,8 @@ class LongControl():
 
       # Toyota starts braking more when it thinks you want to stop
       # Freeze the integrator so we don't accelerate to compensate, and don't allow positive acceleration
-      prevent_overshoot = not CP.stoppingControl and CS.vEgo < 1.5 and v_target_future < 0.7 and v_target_future < self.v_pid
-      deadzone = interp(CS.vEgo, CP.longitudinalTuning.deadzoneBP, CP.longitudinalTuning.deadzoneV)
+      prevent_overshoot = not self.CP.stoppingControl and CS.vEgo < 1.5 and v_target_future < 0.7 and v_target_future < self.v_pid
+      deadzone = interp(CS.vEgo, self.CP.longitudinalTuning.deadzoneBP, self.CP.longitudinalTuning.deadzoneV)
       freeze_integrator = prevent_overshoot
 
       error = self.v_pid - CS.vEgo
@@ -125,9 +122,8 @@ class LongControl():
     # Intention is to stop, switch to a different brake control until we stop
     elif self.long_control_state == LongCtrlState.stopping:
       # Keep applying brakes until the car is stopped
-      if not CS.standstill or output_accel > CP.stopAccel:
-        output_accel -= CP.stoppingDecelRate * DT_CTRL * \
-                        interp(output_accel, [CP.stopAccel, CP.stopAccel/2., CP.stopAccel/4., 0.], [0.3, 0.65, 1., 2.])
+      if not CS.standstill or output_accel > self.CP.stopAccel:
+        output_accel -= self.CP.stoppingDecelRate * DT_CTRL
       output_accel = clip(output_accel, accel_limits[0], accel_limits[1])
       self.reset(CS.vEgo)
 
