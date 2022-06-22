@@ -53,7 +53,7 @@ class LanePlanner:
 
   def parse_model(self, md):
     additional_camera_offset = int(Params().get("OffsetControlSelect", encoding='utf8'))
-    self.camera_offset = -(CAMERA_OFFSET+additional_camera_offset) if wide_camera else (CAMERA_OFFSET+additional_camera_offset)
+    self.camera_offset = -(CAMERA_OFFSET+additional_camera_offset) if self.wide_camera else (CAMERA_OFFSET+additional_camera_offset)
     
     lane_lines = md.laneLines
     if len(lane_lines) == 4 and len(lane_lines[0].t) == TRAJECTORY_SIZE:
